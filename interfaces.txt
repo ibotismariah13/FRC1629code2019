@@ -1,0 +1,29 @@
+Interface List
+Meshach 15
+
+CAN IDs
+-------------------------
+0	PDU	
+2	PCM
+11	leftFrontDrive (SparkMax)
+12  	leftBackDrive (SparkMax)
+13  	rightBackDrive (SparkMax)
+14  	rightFrontDrive (SparkMax)
+
+15	lift motor (SparkMax)
+16
+17
+
+DIO
+-------------------------
+0 	Arm Limit Switch Top
+1	Arm Limit Switch Bottom
+
+AI
+-------------------------
+0 	Arm String Pot
+
+Gyro
+-------------------------
+SPI.Port.kMXP
+
