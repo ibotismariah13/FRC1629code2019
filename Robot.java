@@ -53,7 +53,7 @@ public class Robot extends SampleRobot {
       intakeIsDown  = false;
 
       //setup chosers
-      //start position
+      //start position 
       startPosition.setDefaultOption("None", StartPostion.NONE);
       startPosition.addOption("Left Side", StartPostion.LEFT_SIDE);
       startPosition.addOption("Left Center", StartPostion.LEFT_CENTER);
@@ -118,7 +118,7 @@ public class Robot extends SampleRobot {
 
     //set the lift height to the lower level where we can track targets
     m15.setAutoSide(true);
-    m15.led.setValue(0);
+   // m15.led.setValue(0);
     m15.snapshot.setValue(1) ;  // Turn on snapshot
  
     m15.enableAutoLift();
@@ -138,6 +138,14 @@ public class Robot extends SampleRobot {
 
       // Update all sensor, target and dashboard data
       m15.periodic();
+
+      //Turn on LED if Tracking
+      if( m15.PB_CollectHatch || m15.PB_AutoScore){
+        m15.led.setValue(0);
+      }
+      else{
+        m15.led.setValue(1);
+      }
   
       // Reset Gyro if Back and Start are both pressed
       if (m15.PB_ResetGyro) {
@@ -572,7 +580,7 @@ public class Robot extends SampleRobot {
       }
       else {
         m15.driveVector(150, 0.8, 140, 185, 3.5);
-        m15.driveToTarget(Targets.RL1, 40, 0, 0.5 ,180, 14, 1.5); // was s sec
+        m15.driveToTarget(Targets.RL1, 57, 0, 0.5 ,180, 14, 2); // was 1.5 and 40 inches
         m15.driveTillContact(20, .5, 180, 1); // was 1 sec
       }
     }
@@ -689,7 +697,7 @@ public class Robot extends SampleRobot {
       m15.turnToHeading(-90, 2);
     }
     else {
-      m15.driveVector(142, 0.8, -40, 180, 4);  // was 30 deg
+      m15.driveVector(142, 0.8, -40, 180, 4);  // was 30 deg and 142 inches
       m15.driveVector(96 + (location*CARGO_POS_DIS), 0.7, -10, -90, 5);
     }
 

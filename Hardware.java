@@ -27,6 +27,12 @@
 // 2019-04-11.2.A Shorter timeouts on loader
 // 2019-04-18.3.0 Uses updated motor controller API
 //                Updated Limelight code with larger target recognition
+// 2019-04-24.1 Updated the limit on current for the clibing motor
+// 2-19-04-25 3.2  Increased time and distance on hab to cargo front.
+// 2019-04-25 3.3 Changed the code so it only uses limelight when tracking in teliop
+//2019-04-25 3.4 increased the ampage limity on drive till contact
+// 2019-04-26 3.6 decreased distance on loader to cargo ship
+// 2019-04-26 3.7 restored to same values as 3.4
 // ----------------------------------------------------------
 //
 // ----------------------------------------------------------
@@ -65,7 +71,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class Hardware {
 
   //  #####   PUBLIC DATA  #####
-  public final double  REVISION    =  3.0;
+  public final double  REVISION    =  3.7;
   
   // ===================  Hardware Interfaces	 =============
   private Robot myRobot = null;
@@ -210,7 +216,7 @@ public class Hardware {
   public final double LIFT_MAX_HEIGHT = 70;
   public final double LIFT_MIN_HEIGHT = 1;
   public final double LIFT_INCHES_PER_SECOND = 24 ;
-  public final double MOTOR_CONTACT_CURRENT = 8.25 ; //was 8
+  public final double MOTOR_CONTACT_CURRENT = 8.5 ; //was 8.25
 
   public final double JACK_PITCH = 1.0 / 20.0;
 
@@ -302,11 +308,16 @@ public class Hardware {
     
     rightBackDrive.setSmartCurrentLimit(SMART_CURRENT_LIMIT);
     rightBackDrive.setSecondaryCurrentLimit(SECONDARY_CURRENT_LIMIT, kPeakCurrentDurationMills);
+    
 
     jackLifter  = new CANSparkMax(20, MotorType.kBrushless);
 
+   jackLifter.setSmartCurrentLimit(80);
+    jackLifter.setSecondaryCurrentLimit(80, kPeakCurrentDurationMills);
+
     jackLifter.set(0);
     jackLifter.setInverted(true);
+
 
     liftMotor1 = new TalonSRX(15);
     liftMotor1.set(ControlMode.PercentOutput, 0);
